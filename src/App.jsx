@@ -13,6 +13,8 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import "leaflet/dist/leaflet.css";
 
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 // --- Custom Hook for Data Fetching ---
 const useWaterData = () => {
   const [data, setData] = useState({ tws: {}, geojson: null });
@@ -23,8 +25,8 @@ const useWaterData = () => {
     const fetchData = async () => {
       try {
         const [twsRes, geojsonRes] = await Promise.all([
-          fetch("http://localhost:4000/api/tws"),
-          fetch("http://localhost:4000/api/boundaries"),
+          fetch(`${API_BASE_URL}/api/tws`),
+          fetch(`${API_BASE_URL}/api/boundaries`),
         ]);
 
         if (!twsRes.ok || !geojsonRes.ok) {
